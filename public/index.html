@@ -12,8 +12,8 @@
       justify-content: center;
       min-height: 100vh;
       margin: 0;
-      background-color: #f0f0f0;
-      font-family: Arial, sans-serif;
+      background-color: #ffe6f2; /* Light pink background */
+      font-family: Calibri, sans-serif;
     }
 
     #grid-container {
@@ -79,7 +79,11 @@
       const cell = document.createElement('div');
       cell.className = 'grid-cell';
       cell.addEventListener('click', () => {
-        cell.style.backgroundColor = selectedColor;
+        if (cell.style.backgroundColor === selectedColor) {
+          cell.style.backgroundColor = 'white'; // Empty the color if clicked again
+        } else {
+          cell.style.backgroundColor = selectedColor;
+        }
       });
       gridContainer.appendChild(cell);
     }
