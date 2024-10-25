@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pixella - Color Your Grid</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+    }
+
+    #grid-container {
+      display: grid;
+      grid-template-columns: repeat(25, 0.5cm);
+      grid-template-rows: repeat(25, 0.5cm);
+      gap: 1px;
+      margin-bottom: 20px;
+    }
+
+    .grid-cell {
+      width: 0.5cm;
+      height: 0.5cm;
+      background-color: white;
+      border: 1px solid #ddd;
+      cursor: pointer;
+    }
+
+    #color-palette {
+      display: flex;
+      width: 12.5cm;
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+
+    .color-box {
+      width: 1cm;
+      height: 1cm;
+      margin: 4px;
+      cursor: pointer;
+      border: 1px solid #000;
+    }
+
+    #download-button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div id="grid-container"></div>
+  <div id="color-palette"></div>
+  <button id="download-button">Download Your Creation</button>
+
+  <script>
+    const gridSize = 25;
+    const colors = [
+      '#ff0000', '#ff7f00', '#ffff00', '#7fff00', '#00ff00', '#00ffff',
+      '#0000ff', '#4b0082', '#8b00ff', '#ff00ff', '#ff1493', '#ff69b4'
+    ];
+
+    const gridContainer = document.getElementById('grid-container');
+    const colorPalette = document.getElementById('color-palette');
+    let selectedColor = '#000000';
+
+    // Create the grid cells
+    for (let i = 0; i < gridSize * gridSize; i++) {
+      const cell = document.createElement('div');
+      cell.className = 'grid-cell';
+      cell.addEventListener('click', () => {
+        cell.style.backgroundColor = selectedColor;
+      });
+      gridContainer.appendChild(cell);
+    }
+
+    // Create the color palette
+    colors.forEach(color => {
+      const colorBox = document.createElement('div');
+      colorBox.className = 'color-box';
+      colorBox.style.backgroundColor = color;
+      colorBox.addEventListener('click', () => {
+        selectedColor = color;
+      });
+      colorPalette.appendChild(colorBox);
+    });
+
+    // Download functionality
+    document.getElementById('download-button').addEventListener('click', () => {
+      html2canvas(gridContainer).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'pixella-creation.png';
+        link.href = canvas.toDataURL();
+        link.click();
+      });
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</body>
+</html>
