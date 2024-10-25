@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pixella - Color Your Grid</title>
+  <title>Pixella - Create your PixelArt! </title>
   <style>
     body {
       display: flex;
@@ -80,7 +80,7 @@
       cell.className = 'grid-cell';
       cell.addEventListener('click', () => {
         if (cell.style.backgroundColor === selectedColor) {
-          cell.style.backgroundColor = 'white'; // Empty the color if clicked again
+          cell.style.backgroundColor = 'white'; // Set to white if clicked again
         } else {
           cell.style.backgroundColor = selectedColor;
         }
